@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef, useMemo, useCallback } from "react"
 import { Timer } from "./Timer"
+import Background from "./Background";
 
 const keywords = [
   'shake',
@@ -39,6 +40,7 @@ const useCounter: () => [number, () => void] = () => {
 }
 
 export const App = () => {
+  const [loaded, setLoaded] = useState(false)
   const {letter, generate} = useLetter()
   const [current, setCurrent] = useState(0)
   const [miss, countMiss] = useCounter()
@@ -63,23 +65,26 @@ export const App = () => {
 
   useEffect(() => {
     if (inputRef.current) inputRef.current.focus()
+    setLoaded(true)
   }, [inputRef])
 
 
   return <div onClick={() => {
     if (inputRef.current) inputRef.current.focus()
   }} style={{width: '100%'}}>
-      <input type='text' tabIndex={0} onKeyDown={onKeyDown} ref={inputRef}/>
+    {loaded && <Background />}
       {/* <Timer/> */}
-      <p>{letter.map((l, i) => {
-        return <span style={{
-          color: i >= current ? 'black' : 'lightgray',
-          fontSize: 40
-        }} key={i}>{l}</span>
-      })}</p>
-
-      done: {completeCount}<br/>
-      miss: {miss}
+      <div className='ui'>
+        <input type='text' tabIndex={0} onKeyDown={onKeyDown} ref={inputRef}/>
+        <p>{letter.map((l, i) => {
+          return <span style={{
+            color: i >= current ? 'black' : 'lightgray',
+            fontSize: 40
+          }} key={i}>{l}</span>
+        })}</p>
+        done: {completeCount}<br/>
+        miss: {miss}
+      </div>
     </div>
 }
 
