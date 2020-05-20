@@ -3,6 +3,11 @@ import { Timer } from "./Timer"
 import Background from "./Background";
 import styles from './App.module.css'
 
+type Word = {
+  letter: string
+  display: string
+}
+
 const keywords = [
   { letter: 'shake', display: '鮭'},
   { letter: 'maguro', display: '鮪'},
@@ -28,7 +33,7 @@ const shuffle = ([...array]) => {
 }
 
 const useLetter = () => {
-  const [word, setLetter] = useState([{}])
+  const [word, setLetter] = useState<Word>()
   // const { letter, kanji} = word
   const generate = useCallback(() => setLetter(shuffle(keywords)[0]), [])
   useEffect(() => generate(), [])
@@ -77,11 +82,11 @@ export const App = () => {
     {loaded && <Background count={completeCount} />}
       {/* <Timer/> */}
       <div className='ui'>
-        <h1 className={styles.title}>寿司廻し</h1>
+        <h1  className={styles.title}>寿司廻し</h1>
         <input type='text' tabIndex={0} onKeyDown={onKeyDown} ref={inputRef} style={{opacity: 0}}/>
         <div className={styles.typing}>
-        <p className={styles.kanji}>{word.display}</p>
-        <p>{word.letter && word.letter.split("").map((l, i) => {
+        <p className={styles.kanji}>{word && word.display}</p>
+        <p>{word?.letter && word.letter.split("").map((l, i) => {
           return <span style={{
             color: i >= current ? 'black' : 'lightgray',
           }} key={i}>{l}</span>

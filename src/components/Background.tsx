@@ -51,7 +51,7 @@ function Camera(props: any) {
 //   console.log(uLoader)
 //   return <primitive object={uLoader} />
 // }
-const colors = ['#E6E02A', '#E43327']
+const colors = ['#E43327', '#E6E02A']
 
 export function Background({count}: any) {
   const [control, setControl] = useState(false)
