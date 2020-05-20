@@ -51,8 +51,9 @@ function Camera(props: any) {
 //   console.log(uLoader)
 //   return <primitive object={uLoader} />
 // }
+const colors = ['#E6E02A', '#E43327']
 
-export function Background() {
+export function Background({count}: any) {
   const [control, setControl] = useState(false)
   const [ref, dLight] = useResource<any>()
   const [model, setModel] = useState<any>(null)
@@ -69,6 +70,9 @@ export function Background() {
   //   const loader = new AMFLoader()
   //   loader.load('/models/rook.amf', (object) => setModel(object))
   // }, [])
+  // const color = useMemo(() => colors[Math.floor(Math.random() * colors.length)], [colors])
+  const color = colors[count % 2]
+  console.log(count % 2)
 
   return (
     <div className='container'>
@@ -102,20 +106,17 @@ export function Background() {
           <meshStandardMaterial attach="material" color={'#888888'} />
         </mesh> */}
         {/* {model && <primitive object={model} position={[0,2,0]} />} */}
-        <Group position={[0, 0, 0]} speed={-0.03}/>
+        <Group position={[0, 0, 0]} speed={0.03 + 0.01 * count} scale={[1 + 0.1 * count,1,1]} color={color} />
         <Camera />
       </Canvas>
     </div>
   );
 }
 
-const Group = (props: any) => {
+const Group = ({speed, color, ...props}) => {
   const group = useRef<any>()
-  const {speed, ...otherProps} = props
-  const colors = ['#E6E02A', '#E43327']
-  const color = useMemo(() => colors[Math.floor(Math.random() * colors.length)], [colors])
   useFrame(() => (group.current.rotation.y += speed || 0.01))
-  return <group {...otherProps} ref={group}>
+  return <group {...props} ref={group}>
       <Box position={[0, 0.7, 0]} geometry={[2, 0.4, 1]}  castShadow color={color} />
       <Box position={[0, 0, 0]} geometry={[2, 1, 1]} castShadow color="#CCCCCC" />
     </group>

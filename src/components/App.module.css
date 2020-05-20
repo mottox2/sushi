@@ -1,0 +1,27 @@
+.typing {
+  position: absolute;
+  bottom: 5vh;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 60px;
+  line-height: 1.2;
+  font-family: 'Helvetica';
+  font-weight: 500;
+}
+
+.kanji {
+  font-family: 'Noto Serif JP';
+  font-size: 128px;
+}
+
+.title {
+  font-family: 'Noto Serif JP';
+  font-size: 32px;
+  top: 12px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  opacity: 0.4;
+}
