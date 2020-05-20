@@ -1,3 +1,11 @@
+- [ ] タイピング部分
+  - https://dotinstall.com/lessons/typing_js_v3
+- [ ] タイマーとか
+- [ ] 3Dの部分
+- [ ] サウンド（それまでは画面の揺れでごまかす）
+- [ ] SNSシェア
+- [ ] recoil使う？
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
