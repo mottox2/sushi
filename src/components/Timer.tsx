@@ -3,19 +3,22 @@ import { useEffect, useRef } from "react"
 // useTimerに突っ込んだ方が良さそう。
 
 // count, onTimerEnd
-export const Timer = () => {
+export const Timer = ({ seconds, onEnd }) => {
   const timerRef = useRef<HTMLDivElement>()
   useEffect(() => {
     let timer = 0;
     const countUp = () => {
       timer += 1;
       if (timerRef.current)
-        timerRef.current.innerText = timer + 's'
+        timerRef.current.innerText = seconds - timer + 's'
+      if (seconds - timer < 0) {
+        onEnd()
+      }
     }
     let interval = window.setInterval(countUp, 1000)
     return () => window.clearInterval(interval)
-  }, [])
+  }, [seconds, onEnd])
 
-  return <div ref={timerRef}></div>
+  return <div className='timer' ref={timerRef}></div>
 }
 

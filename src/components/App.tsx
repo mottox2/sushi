@@ -53,10 +53,13 @@ export const App = () => {
   const [miss, countMiss] = useCounter()
   const [completeCount, countComplete] = useCounter()
 
+  const [isEnd, setEnd] = useState(false)
+  const onTimerEnd = useCallback(() => setEnd(true), [])
+
   const inputRef = useRef<HTMLInputElement>()
 
   const onKeyDown = (e) => {
-    if (e.key === word.letter[current]) {
+    if (e.keyCode >= 65 && e.keyCode <= 90 && e.key === word.letter[current]) {
       if (current === word.letter.length - 1) {
         generate()
         setCurrent(0)
@@ -78,23 +81,28 @@ export const App = () => {
 
   return <div onClick={() => {
     if (inputRef.current) inputRef.current.focus()
-  }} style={{width: '100%'}}>
+  }} className={styles.container}>
     {loaded && <Background count={completeCount} />}
-      {/* <Timer/> */}
-      <div className='ui'>
-        <h1  className={styles.title}>寿司廻し</h1>
-        <input type='text' tabIndex={0} onKeyDown={onKeyDown} ref={inputRef} style={{opacity: 0}}/>
-        <div className={styles.typing}>
-        <p className={styles.kanji}>{word && word.display}</p>
-        <p>{word?.letter && word.letter.split("").map((l, i) => {
-          return <span style={{
-            color: i >= current ? 'black' : 'lightgray',
-          }} key={i}>{l}</span>
-        })}</p>
+      { isEnd ?
+        <div className='ui'>
+          結果
+          done: {completeCount}<br/>
+          miss: {miss}
+        </div> :
+        <div className='ui'>
+          <h1  className={styles.title}>寿司廻し</h1>
+          <input type='text' tabIndex={0} onKeyDown={onKeyDown} ref={inputRef} style={{opacity: 0}}/>
+          <div className={styles.typing}>
+            <p className={styles.kanji}>{word && word.display}</p>
+            <p>{word?.letter && word.letter.split("").map((l, i) => {
+              return <span style={{
+                color: i >= current ? 'black' : 'lightgray',
+              }} key={i}>{l}</span>
+            })}</p>
+          </div>
+          <Timer seconds={10} onEnd={onTimerEnd} />
         </div>
-        {/* done: {completeCount}<br/>
-        miss: {miss} */}
-      </div>
+      }
     </div>
 }
 
