@@ -2,6 +2,8 @@ import { useEffect, useState, useRef, useMemo, useCallback, KeyboardEvent } from
 import { Timer } from "./Timer"
 import Background from "./Background";
 import styles from './App.module.css'
+import { Result } from "./Result";
+import { Title } from "./Title";
 
 type Word = {
   letter: string
@@ -74,11 +76,15 @@ export const App = () => {
   const inputRef = useRef<HTMLInputElement>()
 
   const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.keyCode === 13 && mode === 'result') setMode('title')
+    if (e.keyCode === 13 && mode === 'title') setMode('game')
+    if (e.keyCode === 27 && mode === 'game') setMode('title') // ESC
     if (e.metaKey || e.keyCode < 65 || e.keyCode > 90) return
     if (e.key === word.letter[current]) next()
     else countMiss()
     e.preventDefault()
   }
+  const restart = useCallback(() => setMode('title'), [])
 
   useEffect(() => word?.letter && countScore(), [word?.letter])
   useEffect(() => {
@@ -89,16 +95,13 @@ export const App = () => {
   return <div onClick={() => {
     if (inputRef.current) inputRef.current.focus()
   }} className={styles.container}>
+    <input type='text' tabIndex={0} onKeyDown={onKeyDown} ref={inputRef} style={{opacity: 0}}/>
     {mounted && <Background count={score} />}
-    { mode === 'result' ?
+    { mode === 'title' && <Title start={() => setMode('game')}/>}
+    { mode === 'result' && <Result score={score} miss={miss} restart={restart} />}
+    { mode === 'game' &&
       <div className='ui'>
-        結果
-        score: {score}<br/>
-        miss: {miss}
-      </div> :
-      <div className='ui'>
-        <h1  className={styles.title}>寿司廻し</h1>
-        <input type='text' tabIndex={0} onKeyDown={onKeyDown} ref={inputRef} style={{opacity: 0}}/>
+        <h1 className={styles.title}>寿司廻し</h1>
         <div className={styles.typing}>
           <p className={styles.kanji}>{word?.display}</p>
           <p>{word?.letter && word.letter.split("").map((l, i) => {
