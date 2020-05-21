@@ -104,18 +104,19 @@ export const App = () => {
   return <div onClick={() => {
     if (inputRef.current) inputRef.current.focus()
   }} className={styles.container}>
-    <input type='text' tabIndex={0} onKeyDown={onKeyDown} ref={inputRef} style={{opacity: 0}}/>
+    <input className={styles.input} type='text' tabIndex={0} onKeyDown={onKeyDown} ref={inputRef} />
     {mounted && <Background count={score} />}
     { mode === 'title' && <Title start={() => setMode('game')}/>}
     { mode === 'result' && <Result score={score} miss={miss} restart={restart} />}
     { mode === 'game' &&
-      <div className='ui'>
+      <div>
         <h1 className={cn(styles.title, 'serif')}>寿司廻し</h1>
         <div className={styles.typing}>
           <p className={cn(styles.kanji, 'serif')}>{word?.display}</p>
           <p>{word?.letter && word.letter.split("").map((l, i) => {
             return <span style={{
               color: i >= current ? 'black' : 'lightgray',
+              textDecoration: i == current ? 'underline' : 'none'
             }} key={i}>{l}</span>
           })}</p>
         </div>

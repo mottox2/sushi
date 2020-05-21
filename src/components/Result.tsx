@@ -1,4 +1,5 @@
 import styles from './Result.module.css'
+import cn from 'classnames'
 
 export const Result = (props: {
   miss: number,
@@ -8,10 +9,29 @@ export const Result = (props: {
   const { miss, score, restart } = props
 
   return <div className={styles.container}>
-    <h1 className='serif'>結果</h1>
-    score: {score}<br/>
-    miss: {miss}<br/>
-
-    <button onClick={restart}>タイトルに戻る</button>
+    <div>
+      <h1 className={cn(styles.title, 'serif')}>結果</h1>
+      <div className={styles.flex}>
+        <div className={styles.score}>
+          <div className={cn(styles.scoreLabel, 'serif')}>
+            食べた寿司
+          </div>
+          <div className={styles.scoreValue}>
+            {score}
+            <small>貫</small>
+          </div>
+        </div>
+        <div className={styles.score}>
+          <div className={cn(styles.scoreLabel, 'serif')}>
+            ミスした回数
+          </div>
+          <div className={styles.scoreValue}>
+            {miss}
+            <small>回</small>
+          </div>
+        </div>
+      </div>
+      <button className={styles.btn} onClick={restart}>タイトルに戻る</button>
+    </div>
   </div>
 }
