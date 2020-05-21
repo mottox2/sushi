@@ -36,7 +36,6 @@ function Camera(props: any) {
   useEffect(() => {
     if (!ref.current) return
     setDefaultCamera(ref.current)
-    console.log(ref.current)
     ref.current.lookAt(new Vector3(0, 0, 0))
   }, [ref, setDefaultCamera])
 
@@ -57,7 +56,6 @@ export function Background({count}: any) {
   const [control, setControl] = useState(false)
   const [ref, dLight] = useResource<any>()
   const [model, setModel] = useState<any>(null)
-  console.log(dLight)
   const loader = new TextureLoader()
   const texture =loader.load('https://threejsfundamentals.org/threejs/lessons/resources/images/compressed-but-large-wood-texture.jpg')
   texture.wrapS = RepeatWrapping
