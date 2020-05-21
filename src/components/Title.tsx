@@ -7,6 +7,6 @@ export const Title = (props: {
 
   return <div className={styles.container}>
     寿司
-    <button onClick={start}>Start</button>
+    <button onClick={start}>Press enter key</button>
   </div>
 }

@@ -15,12 +15,10 @@
 }
 
 .kanji {
-  font-family: 'Noto Serif JP';
   font-size: 128px;
 }
 
 .title {
-  font-family: 'Noto Serif JP';
   font-size: 32px;
   top: 12px;
   position: absolute;

@@ -8,10 +8,10 @@ export const Result = (props: {
   const { miss, score, restart } = props
 
   return <div className={styles.container}>
-    <h1>結果</h1>
+    <h1 className='serif'>結果</h1>
     score: {score}<br/>
     miss: {miss}<br/>
 
-    <button onClick={restart}>aaa</button>
+    <button onClick={restart}>タイトルに戻る</button>
   </div>
 }

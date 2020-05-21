@@ -4,6 +4,7 @@ import Background from "./Background";
 import styles from './App.module.css'
 import { Result } from "./Result";
 import { Title } from "./Title";
+import cn from 'classnames'
 
 type Word = {
   letter: string
@@ -53,10 +54,11 @@ const useLetter = () => {
   return { word, current, next }
 }
 
-const useCounter = (initialCount?: number): [number, () => void] => {
+const useCounter = (initialCount?: number): [number, () => void, () => void] => {
   const [count, setCount] = useState(initialCount || 0)
   const increment = useCallback(() => setCount(i => i+1), [])
-  return [ count, increment ]
+  const reset = useCallback(() => setCount(0), [])
+  return [ count, increment, reset]
 }
 
 type Mode = "title" | "game" | "result"
@@ -69,8 +71,8 @@ const useMode = (initialMode: Mode) => {
 export const App = () => {
   const [mounted, setMounted] = useState(false)
   const {word, current, next} = useLetter()
-  const [miss, countMiss] = useCounter()
-  const [score, countScore] = useCounter(-1)
+  const [miss, countMiss, resetMiss] = useCounter()
+  const [score, countScore, resetScore] = useCounter(-1)
   const { mode, setMode } = useMode('title')
   const onTimerEnd = useCallback(() => setMode('result'), [])
   const inputRef = useRef<HTMLInputElement>()
@@ -92,6 +94,13 @@ export const App = () => {
     setMounted(true)
   }, [inputRef])
 
+  // reset
+  useEffect(() => {
+    if (mode !== 'title') return
+    resetMiss()
+    resetScore()
+  }, [mode])
+
   return <div onClick={() => {
     if (inputRef.current) inputRef.current.focus()
   }} className={styles.container}>
@@ -101,9 +110,9 @@ export const App = () => {
     { mode === 'result' && <Result score={score} miss={miss} restart={restart} />}
     { mode === 'game' &&
       <div className='ui'>
-        <h1 className={styles.title}>寿司廻し</h1>
+        <h1 className={cn(styles.title, 'serif')}>寿司廻し</h1>
         <div className={styles.typing}>
-          <p className={styles.kanji}>{word?.display}</p>
+          <p className={cn(styles.kanji, 'serif')}>{word?.display}</p>
           <p>{word?.letter && word.letter.split("").map((l, i) => {
             return <span style={{
               color: i >= current ? 'black' : 'lightgray',

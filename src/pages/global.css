@@ -16,5 +16,8 @@
   top: 0;
   left: 0;
   font-size: 50px;
+}
 
+.serif {
+  font-family: 'Noto Serif JP', 游明朝, 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Hiragino Mincho Pro',serif;
 }
