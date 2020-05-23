@@ -7,6 +7,9 @@ export const Result = (props: {
   restart: () => void;
 }) => {
   const { miss, score, restart } = props
+  const url = 'https://sushi-mawashi.now.sh/'
+  const text = '寿司を回しました'
+  const shareUrl = `http://twitter.com/share?url=${url}&text=${text}&hashtags=寿司廻し`
 
   return <div className={styles.container}>
     <div>
@@ -32,6 +35,7 @@ export const Result = (props: {
         </div>
       </div>
       <button className={styles.btn} onClick={restart}>タイトルに戻る</button>
+      <a className={styles.btn} href={shareUrl} target="_blank">Twitterでシェアする</a>
     </div>
   </div>
 }

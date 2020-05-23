@@ -15,5 +15,14 @@
   top: 20px;
   text-align: center;
   font-size: 148px;
-  font-weight: bold;;
+  font-weight: bold;
+}
+
+.blink {
+  animation: blink 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes blink{
+    0% {opacity:0;}
+    100% {opacity:1;}
 }

@@ -9,7 +9,7 @@ export const Title = (props: {
 
   return <div className={styles.container}>
     <p className={cn(tStyles.title, 'serif')}>寿司廻し</p>
-    <div onClick={start} className={styles.typing}>
+    <div onClick={start} className={cn(styles.typing, tStyles.blink)}>
       <p className={tStyles.enter}>Press Enter key</p>
     </div>
   </div>

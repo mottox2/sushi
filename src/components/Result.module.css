@@ -42,4 +42,7 @@
   font-weight: bold;
   display: block;
   margin: 0 auto;
+  display: inline-block;
+  text-decoration: none;
+  margin: 0 6px;
 }
