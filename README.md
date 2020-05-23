@@ -1,11 +1,6 @@
-- [x] タイピング部分
-- [ ] タイマーとか
-- [ ] 3Dの部分
-- [ ] サウンド（それまでは画面の揺れでごまかす）
-- [ ] SNSシェア
-- [ ] recoil使う？
+# 寿司廻し
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app).
+![thumbnail](/public/ogp.png)
 
 ## Getting Started
 

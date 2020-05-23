@@ -3,7 +3,7 @@ import { App } from '../components/App'
 
 const title = '寿司廻し'
 const description = 'あなたのタイピングで寿司を回して、より速く寿司を回そう！'
-const imageUrl = '/ogp.png'
+const imageUrl = 'https://sushi-mawashi.now.sh/ogp.png'
 
 export default function Home() {
   return (
