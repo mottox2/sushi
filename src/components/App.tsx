@@ -5,13 +5,6 @@ import { Result } from "./Result";
 import { Title } from "./Title";
 import { Game } from './game'
 
-const useCounter = (initialCount?: number): [number, () => void, () => void] => {
-  const [count, setCount] = useState(initialCount || 0)
-  const increment = useCallback(() => setCount(i => i+1), [])
-  const reset = useCallback(() => setCount(0), [])
-  return [ count, increment, reset]
-}
-
 type Mode = "title" | "game" | "result"
 
 const useMode = (initialMode: Mode) => {
@@ -19,24 +12,29 @@ const useMode = (initialMode: Mode) => {
   return { mode, setMode }
 }
 
+export type Stats = {
+  miss: number,
+  score: number,
+  speed: number
+}
+
+const initialStats = { miss: 0, score: 0, speed: 1 }
+
 export const App = () => {
   const [mounted, setMounted] = useState(false)
-  const [miss, countMiss, resetMiss] = useCounter()
-  const [score, countScore, resetScore] = useCounter(0)
   const { mode, setMode } = useMode('title')
+  const [ stats, setStats ] = useState<Stats>(initialStats)
   const onTimerEnd = useCallback(() => setMode('result'), [])
   const restart = useCallback(() => setMode('title'), [])
 
   useEffect(() => setMounted(true), [])
 
-  return <div onClick={() => {
-    // if (inputRef.current) inputRef.current.focus()
-  }} className={styles.container}>
-    {mounted && <Background count={score} />}
+  return <div className={styles.container}>
+    {mounted && <Background count={stats.score} />}
     { mode === 'title' && <Title start={() => setMode('game')}/>}
-    { mode === 'result' && <Result score={score} miss={miss} restart={restart} />}
+    { mode === 'result' && <Result score={stats.score} miss={stats.miss} restart={restart} />}
     { mode === 'game' &&
-      <Game onEnd={onTimerEnd} onReset={() => setMode('title')} />
+      <Game onEnd={onTimerEnd} onReset={() => setMode('title')} setStats={setStats} />
     }
   </div>
 }

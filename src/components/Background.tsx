@@ -104,7 +104,7 @@ export function Background({count}: any) {
           <meshStandardMaterial attach="material" color={'#888888'} />
         </mesh> */}
         {/* {model && <primitive object={model} position={[0,2,0]} />} */}
-        <Group position={[0, 0, 0]} speed={0.03 + 0.01 * count} scale={[1 + 0.1 * count,1,1]} color={color} />
+        <Group position={[0, 0, 0]} speed={0.03 * count} scale={[1 + 0.18 * count,1,1]} color={color} />
         <Camera />
       </Canvas>
     </div>

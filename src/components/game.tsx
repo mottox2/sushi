@@ -3,6 +3,7 @@ import { Timer } from "./Timer"
 import styles from './App.module.css'
 import cn from 'classnames'
 import { useInputRef } from "../hooks/useInput"
+import { Stats } from "./App"
 
 type Word = {
   letter: string
@@ -62,9 +63,10 @@ const useCounter = (initialCount?: number): [number, () => void, () => void] => 
 type Props = {
   onEnd: () => void
   onReset: () => void
+  setStats: (stats: Stats) => void
 }
 
-export const Game: React.FC<Props> = ({onEnd, onReset}) => {
+export const Game: React.FC<Props> = ({onEnd, onReset, setStats}) => {
   const {word, current, next} = useLetter()
   const [miss, countMiss, resetMiss] = useCounter()
   const [score, countScore, resetScore] = useCounter(-1)
@@ -77,6 +79,10 @@ export const Game: React.FC<Props> = ({onEnd, onReset}) => {
     else countMiss()
     e.preventDefault()
   }
+
+  useEffect(() => {
+    setStats({ miss, score, speed: Math.pow(1.05, score) * Math.pow(0.98, miss) })
+  }, [miss, score])
 
   useEffect(() => word?.letter && countScore(), [word?.letter])
 
@@ -96,7 +102,7 @@ export const Game: React.FC<Props> = ({onEnd, onReset}) => {
         })}</p>
       </div>
       {score}
-      <Timer seconds={10} onEnd={onEnd} />
+      <Timer seconds={20} onEnd={onEnd} />
     </div>
   </div>
 }
