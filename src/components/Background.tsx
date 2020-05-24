@@ -61,12 +61,12 @@ const Sushi = ({speed, color, mode, setRotation, ...props}) => {
 
   useEffect(() => {
     if (mode === 'result') setRotation(rotation / 3.14 / 2)
+    rotation = 0
   }, [mode])
 
   useFrame(() => {
     group.current.rotation.y += speed || 0.01
-    if (mode !== 'game') return rotation = 0
-    rotation += speed || 0.01
+    if (mode === 'game') rotation += speed || 0.01
   })
 
   return <group {...props} ref={group}>
