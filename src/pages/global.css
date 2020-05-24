@@ -5,24 +5,19 @@
 
 .timer {
   position: absolute;
-  top: 0;
+  top: 12px;
+  text-align: center;
+  right: 0;
   left: 0;
-  font-size: 50px;
+  font-size: 64px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: bold;
+}
+
+.sansserif {
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 .serif {
   font-family: 'Noto Serif JP', 游明朝, 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Hiragino Mincho Pro',serif;
-}
-
-@-webkit-keyframes blink{
-  0% {opacity:0;}
-  100% {opacity:1;}
-}
-@-moz-keyframes blink{
-  0% {opacity:0;}
-  100% {opacity:1;}
-}
-@keyframes blink{
-  0% {opacity:0;}
-  100% {opacity:1;}
 }

@@ -66,6 +66,8 @@ type Props = {
   setStats: (stats: Stats) => void
 }
 
+const time = process.env.NODE_ENV === 'development' ? 10 : 20
+
 export const Game: React.FC<Props> = ({onEnd, onReset, setStats}) => {
   const {word, current, next} = useLetter()
   const [miss, countMiss, resetMiss] = useCounter()
@@ -91,7 +93,7 @@ export const Game: React.FC<Props> = ({onEnd, onReset, setStats}) => {
   }} className={styles.container}>
     <input className={styles.input} type='text' tabIndex={0} onKeyDown={onKeyDown} ref={inputRef} />
     <div>
-      <h1 className={cn(styles.title, 'serif')}>寿司廻し</h1>
+      {/* <h1 className={cn(styles.title, 'serif')}>寿司廻し</h1> */}
       <div className={styles.typing}>
         <p className={cn(styles.kanji, 'serif')}>{word?.display}</p>
         <p>{word?.letter && word.letter.split("").map((l, i) => {
@@ -101,8 +103,7 @@ export const Game: React.FC<Props> = ({onEnd, onReset, setStats}) => {
           }} key={i}>{l}</span>
         })}</p>
       </div>
-      {score}
-      <Timer seconds={10} onEnd={onEnd} />
+      <Timer seconds={time} onEnd={onEnd} />
     </div>
   </div>
 }

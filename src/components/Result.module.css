@@ -32,7 +32,10 @@
 
 .scoreValue {
   font-size: 60px;
+}
 
+.scoreValue small {
+  font-size: 36px;
 }
 
 .btn {
@@ -42,7 +45,19 @@
   font-weight: bold;
   display: block;
   margin: 0 auto;
-  display: inline-block;
+  display: block;
   text-decoration: none;
-  margin: 0 6px;
+  margin: 6px 6px;
+  width: 100%;
+  text-align: center;
+}
+
+.buttons {
+  max-width: 200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.twitter {
+  background-color: #1DA1F2;
 }

@@ -10,11 +10,12 @@ export const Timer = ({ seconds, onEnd }) => {
     const countUp = () => {
       timer += 1;
       if (timerRef.current)
-        timerRef.current.innerText = seconds - timer + 's'
+        timerRef.current.innerText = String(seconds - timer)
       if (seconds - timer < 0) {
         onEnd()
       }
     }
+    countUp()
     let interval = window.setInterval(countUp, 1000)
     return () => window.clearInterval(interval)
   }, [seconds, onEnd])
