@@ -81,7 +81,7 @@ export const Game: React.FC<Props> = ({onEnd, onReset, setStats}) => {
   }
 
   useEffect(() => {
-    setStats({ miss, score, speed: Math.pow(1.05, score) * Math.pow(0.98, miss) })
+    setStats({ miss, score, speed: Math.pow(1.1, score) * Math.pow(0.95, miss) })
   }, [miss, score])
 
   useEffect(() => word?.letter && countScore(), [word?.letter])
@@ -102,7 +102,7 @@ export const Game: React.FC<Props> = ({onEnd, onReset, setStats}) => {
         })}</p>
       </div>
       {score}
-      <Timer seconds={20} onEnd={onEnd} />
+      <Timer seconds={10} onEnd={onEnd} />
     </div>
   </div>
 }

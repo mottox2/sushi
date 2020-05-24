@@ -20,19 +20,24 @@ export type Stats = {
 
 const initialStats = { miss: 0, score: 0, speed: 1 }
 
-export const App = () => {
+const useMounted = () => {
   const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+  return mounted
+}
+
+export const App = () => {
+  const mounted = useMounted()
   const { mode, setMode } = useMode('title')
   const [ stats, setStats ] = useState<Stats>(initialStats)
+  const [ rotation, setRotation ] = useState(0)
   const onTimerEnd = useCallback(() => setMode('result'), [])
   const restart = useCallback(() => setMode('title'), [])
 
-  useEffect(() => setMounted(true), [])
-
   return <div className={styles.container}>
-    {mounted && <Background count={stats.score} />}
+    {mounted && <Background count={stats.score} mode={mode} setRotation={setRotation} />}
     { mode === 'title' && <Title start={() => setMode('game')}/>}
-    { mode === 'result' && <Result score={stats.score} miss={stats.miss} restart={restart} />}
+    { mode === 'result' && <Result score={stats.score} miss={stats.miss} rotation={rotation} restart={restart} />}
     { mode === 'game' &&
       <Game onEnd={onTimerEnd} onReset={() => setMode('title')} setStats={setStats} />
     }
