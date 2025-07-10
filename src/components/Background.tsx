@@ -1,14 +1,8 @@
-import React, { useRef, useState, useMemo, useEffect, Suspense } from 'react';
-import { Canvas, useFrame, useThree, useResource } from 'react-three-fiber'
-import { Vector3, PerspectiveCamera } from 'three';
+// @ts-nocheck
+import React, { useRef, useEffect } from 'react';
+import { Canvas, useFrame, useThree } from 'react-three-fiber'
+import { Vector3 } from 'three';
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      orbitControls: any
-    }
-  }
-}
 
 function Box(props: any) {
   return (
@@ -19,19 +13,12 @@ function Box(props: any) {
   )
 }
 
-function Camera(props: any) {
-  const ref = useRef<PerspectiveCamera>()
-  const { setDefaultCamera } = useThree()
-  // Make the camera known to the system
+function SetCameraLookAt() {
+  const { camera } = useThree()
   useEffect(() => {
-    if (!ref.current) return
-    setDefaultCamera(ref.current)
-    ref.current.lookAt(new Vector3(0, 0, 0))
-  }, [ref, setDefaultCamera])
-
-  // Update it every frame
-  // useFrame(() => ref.current.updateMatrixWorld())
-  return <perspectiveCamera position={[3, 3,3 ]} args={['90', window.innerWidth / window.innerHeight]} ref={ref} {...props} />
+    camera.lookAt(new Vector3(0, 0, 0))
+  }, [camera])
+  return null
 }
 
 const colors = ['#E43327', '#E6E02A']
@@ -39,7 +26,7 @@ export function Background({count, mode, setRotation}: any) {
   const color = colors[count % 2]
   return (
     <div className='container'>
-      <Canvas shadowMap={true}>
+      <Canvas shadowMap={true} camera={{ position: [3, 3, 3], fov: 90 }}>
         <ambientLight />
         <pointLight castShadow position={[0, 10, 20]} />
         <gridHelper args={[300, 100, 0x888888, 0x888888]} position={[0, -0.65, 0]}/>
@@ -48,7 +35,7 @@ export function Background({count, mode, setRotation}: any) {
           <meshStandardMaterial attach="material" color={'#a0a0a0'} roughness={0.0} />
         </mesh>
         <Sushi setRotation={setRotation} mode={mode} position={[0, 0, 0]} speed={0.03 * count} scale={[1 + 0.18 * count,1,1]} color={color} />
-        <Camera />
+        <SetCameraLookAt />
       </Canvas>
     </div>
   );
@@ -57,7 +44,7 @@ export function Background({count, mode, setRotation}: any) {
 let rotation = 0
 
 const Sushi = ({speed, color, mode, setRotation, ...props}) => {
-  const group = useRef<any>()
+  const group = useRef<any>(null)
 
   useEffect(() => {
     if (mode === 'result') setRotation(rotation / 3.14 / 2)
