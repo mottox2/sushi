@@ -21,6 +21,15 @@ const keywords = [
   { letter: 'suzuki', display: '鱸'},
   { letter: 'tai', display: '鯛'},
   { letter: 'tako', display: '蛸'},
+  { letter: 'sanma', display: '秋刀魚'},
+  { letter: 'ika', display: '烏賊'},
+  { letter: 'fugu', display: '河豚'},
+  { letter: 'anago', display: '穴子'},
+  { letter: 'sawara', display: '鰆'},
+  { letter: 'buri', display: '鰤'},
+  { letter: 'karei', display: '鰈'},
+  { letter: 'hotate', display: '帆立'},
+  { letter: 'kani', display: '蟹'},
 ]
 
 const shuffle = ([...array]) => {
