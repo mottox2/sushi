@@ -1,4 +1,3 @@
-import { KeyboardEvent } from "react"
 import { Timer } from "./Timer"
 import styles from './App.module.css'
 import cn from 'classnames'

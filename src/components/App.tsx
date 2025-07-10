@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useMemo, useCallback, KeyboardEvent } from "react"
+import { useEffect, useState, useCallback } from "react"
 import Background from "./Background";
 import styles from './App.module.css'
 import { Result } from "./Result";
