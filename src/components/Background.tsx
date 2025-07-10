@@ -1,14 +1,8 @@
-import React, { useRef, useState, useMemo, useEffect, Suspense } from 'react';
-import { Canvas, useFrame, useThree, useResource } from 'react-three-fiber'
+// @ts-nocheck
+import React, { useRef, useEffect } from 'react';
+import { Canvas, useFrame, useThree } from 'react-three-fiber'
 import { Vector3, PerspectiveCamera } from 'three';
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      orbitControls: any
-    }
-  }
-}
 
 function Box(props: any) {
   return (
@@ -20,7 +14,7 @@ function Box(props: any) {
 }
 
 function Camera(props: any) {
-  const ref = useRef<PerspectiveCamera>()
+  const ref = useRef<PerspectiveCamera>(null)
   const { setDefaultCamera } = useThree()
   // Make the camera known to the system
   useEffect(() => {
@@ -57,7 +51,7 @@ export function Background({count, mode, setRotation}: any) {
 let rotation = 0
 
 const Sushi = ({speed, color, mode, setRotation, ...props}) => {
-  const group = useRef<any>()
+  const group = useRef<any>(null)
 
   useEffect(() => {
     if (mode === 'result') setRotation(rotation / 3.14 / 2)

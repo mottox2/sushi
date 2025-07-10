@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react"
 
 // count, onTimerEnd
 export const Timer = ({ seconds, onEnd }) => {
-  const timerRef = useRef<HTMLDivElement>()
+  const timerRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
     let timer = 0;
     const countUp = () => {
