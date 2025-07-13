@@ -10,7 +10,7 @@ export const Title = (props: {
   const { start } = props
   const inputRef = useInputRef()
   const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.keyCode === 13) start()
+    if (e.key === 'Enter') start()
   }
 
   return <div className={styles.container} onClick={() => inputRef.current && inputRef.current.focus()}>

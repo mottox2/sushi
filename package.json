@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@react-three/fiber": "^9.0.0",
@@ -22,6 +24,7 @@
     "@types/node": "^24.0.12",
     "@types/react": "^19.1.8",
     "@types/three": "^0.178.1",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
   }
 }
