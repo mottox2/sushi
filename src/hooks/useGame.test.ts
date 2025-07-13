@@ -1,8 +1,9 @@
 import { describe, it, expect } from 'vitest'
 import { processKeyInput, calculateSpeed } from './useGame'
+import { Word } from '../data/keywords'
 
 describe('processKeyInput function', () => {
-  const mockWord = { letter: 'shake', display: '鮭' }
+  const mockWord: Word = { letter: 'shake', display: '鮭' }
   const initialState = {
     word: mockWord,
     current: 0,
@@ -51,7 +52,7 @@ describe('calculateSpeed function', () => {
 })
 
 describe('processKeyInput with sequential inputs', () => {
-  const mockWord = { letter: 'aji', display: '鯵' }
+  const mockWord: Word = { letter: 'aji', display: '鯵' }
 
   it('should handle complete word typing sequence', () => {
     let state = {
