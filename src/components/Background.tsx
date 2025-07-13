@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Vector3 } from 'three';
 import * as THREE from 'three'
 
 function Box(props: any) {
@@ -15,7 +14,7 @@ function Box(props: any) {
 function SetCameraLookAt() {
   const { camera } = useThree()
   useEffect(() => {
-    camera.lookAt(new Vector3(0, 0, 0))
+    camera.lookAt(new THREE.Vector3(0, 0, 0))
   }, [camera])
   return null
 }
