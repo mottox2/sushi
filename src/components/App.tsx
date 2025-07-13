@@ -1,3 +1,4 @@
+'use client'
 import { useEffect, useState, useCallback } from "react"
 import Background from "./Background";
 import styles from './App.module.css'

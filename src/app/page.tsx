@@ -14,7 +14,7 @@ export default function Home() {
         <meta property="og:description" content={description} key="description" />
         <meta property="og:type" content="website" key="type" />
         <meta property="og:image" content={imageUrl} key="image" />
-        <meta name="twitter:creator" content="@mottox2" key="twitter:creater" />
+        <meta name="twitter:creator" content="@mottox2" key="twitter:creator" />
         <meta name="twitter:title" content={title} key="twitter:title" />
         <meta name="twitter:card" content="summary_large_image" key="twitter:card" />
         <meta name="twitter:description" content={description} key="twitter:description" />
