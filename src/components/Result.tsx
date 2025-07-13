@@ -20,7 +20,7 @@ export const Result = (props: {
   const text = `${Math.floor(rotation)}回寿司を廻しました。`
   const shareUrl = `http://twitter.com/share?url=${url}&text=${text}&hashtags=寿司廻し`
 
-  return <div className={styles.container} onClick={() => inputRef.current.focus()}>
+  return <div className={styles.container} onClick={() => inputRef.current && inputRef.current.focus()}>
     <input className={commonStyles.input} type='text' tabIndex={0} onKeyDown={onKeyDown} ref={inputRef} />
     <div>
       <h1 className={cn(styles.title, 'serif')}>結果</h1>

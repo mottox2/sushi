@@ -41,22 +41,27 @@ const shuffle = ([...array]) => {
 }
 
 const useLetter = () => {
-  const [word, setLetter] = useState<Word>()
+  // 初期値を必ずセットする
+  const [word, setWord] = useState<Word>(() => shuffle(keywords)[0])
   const [current, setCurrent] = useState(0)
 
-  const generate = useCallback(() => setLetter(shuffle(keywords)[0]), [])
+  // 新しい単語に切り替え、インデックスもリセット
+  const reset = useCallback(() => {
+    const newWord = shuffle(keywords)[0]
+    setWord(newWord)
+    setCurrent(0)
+  }, [])
 
-  const next = () => {
-    if (current === word.letter.length - 1) {
-      setCurrent(0)
-      generate()
-    } else {
+  // 次の文字へ進む。最後まで到達したら新しい単語に切り替え
+  const next = useCallback(() => {
+    if (current < word.letter.length - 1) {
       setCurrent(i => i + 1)
+    } else {
+      reset()
     }
-  }
-  useEffect(() => generate(), [])
+  }, [current, word.letter.length, reset])
 
-  return { word, current, next }
+  return { word, current, next, reset }
 }
 
 const useCounter = (initialCount?: number): [number, () => void, () => void] => {

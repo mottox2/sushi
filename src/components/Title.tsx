@@ -13,7 +13,7 @@ export const Title = (props: {
     if (e.keyCode === 13) start()
   }
 
-  return <div className={styles.container} onClick={() => inputRef.current.focus()}>
+  return <div className={styles.container} onClick={() => inputRef.current && inputRef.current.focus()}>
     <input className={styles.input} type='text' tabIndex={0} onKeyDown={onKeyDown} ref={inputRef} />
     <p className={cn(tStyles.title, 'serif')}>寿司廻し</p>
     <div onClick={start} className={cn(styles.typing, tStyles.blink)}>
