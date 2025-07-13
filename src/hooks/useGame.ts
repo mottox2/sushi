@@ -83,9 +83,10 @@ export const useGame = ({ onReset, setStats }: Params) => {
   const inputRef = useInputRef()
 
   const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.keyCode === 27) onReset()
-    if (e.metaKey || e.keyCode < 65 || e.keyCode > 90) return
-    if (e.key === word.letter[current]) next()
+    if (e.key === 'Escape') onReset()
+    const key = e.key.toLowerCase()
+    if (e.metaKey || !/^[a-z]$/.test(key)) return
+    if (key === word.letter[current]) next()
     else countMiss()
     e.preventDefault()
   }

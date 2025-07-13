@@ -15,7 +15,7 @@ export const Result = (props: {
   const { miss, score, restart, rotation } = props
   const inputRef = useInputRef()
   const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.keyCode === 13) restart()
+    if (e.key === 'Enter') restart()
   }
   const text = `${Math.floor(rotation)}回寿司を廻しました。`
   const shareUrl = `http://twitter.com/share?url=${url}&text=${text}&hashtags=寿司廻し`
