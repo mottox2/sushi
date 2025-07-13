@@ -1,5 +1,4 @@
 import { useEffect, useState, KeyboardEvent } from "react"
-import { useInputRef } from "./useInput"
 import { Stats } from "../components/App"
 import { keywords, Word } from "../data/keywords"
 
@@ -61,7 +60,6 @@ export const useGame = ({ onReset, setStats }: Params) => {
     miss: 0,
     score: -1
   }))
-  const inputRef = useInputRef()
 
   const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Escape') {
@@ -91,7 +89,6 @@ export const useGame = ({ onReset, setStats }: Params) => {
   return { 
     word: gameState.word, 
     current: gameState.current, 
-    onKeyDown, 
-    inputRef 
+    onKeyDown
   }
 }

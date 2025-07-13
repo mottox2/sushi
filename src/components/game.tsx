@@ -2,6 +2,7 @@ import { Timer } from "./Timer"
 import styles from './App.module.css'
 import cn from 'classnames'
 import { useGame } from "../hooks/useGame"
+import { useInputRef } from "../hooks/useInput"
 import { Stats } from "./App"
 
 type Props = {
@@ -13,7 +14,8 @@ type Props = {
 const time = process.env.NODE_ENV === 'development' ? 10 : 20
 
 export const Game: React.FC<Props> = ({ onEnd, onReset, setStats }) => {
-  const { word, current, onKeyDown, inputRef } = useGame({ onReset, setStats })
+  const { word, current, onKeyDown } = useGame({ onReset, setStats })
+  const inputRef = useInputRef()
 
   return <div onClick={() => {
     if (inputRef.current) inputRef.current.focus()
