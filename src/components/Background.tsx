@@ -27,11 +27,9 @@ export function Background({count, mode, setRotation}: any) {
       <Canvas
         shadows
         camera={{ position: [3, 3, 3], fov: 90 }}
-        // linear
         gl={{
-          outputEncoding: THREE.sRGBEncoding,
           toneMapping: THREE.ACESFilmicToneMapping,
-          toneMappingExposure: 2,
+          toneMappingExposure: 1.5,
         }}
       >
         <ambientLight intensity={2} />
