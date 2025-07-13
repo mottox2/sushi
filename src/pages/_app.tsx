@@ -1,5 +1,4 @@
 import { AppProps } from 'next/app'
-import 'ress'
 import './global.css'
 
 function MyApp({ Component, pageProps }: AppProps) {

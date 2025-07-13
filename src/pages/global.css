@@ -1,4 +1,6 @@
 
+@import "tailwindcss";
+
 .container {
   height: 100vh;
 }

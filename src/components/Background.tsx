@@ -23,27 +23,25 @@ const colors = ['#E43327', '#E6E02A']
 export function Background({count, mode, setRotation}: any) {
   const color = colors[count % 2]
   return (
-    <div className='container'>
-      <Canvas
-        shadows
-        camera={{ position: [3, 3, 3], fov: 90 }}
-        gl={{
-          toneMapping: THREE.ACESFilmicToneMapping,
-          toneMappingExposure: 1.5,
-        }}
-      >
-        <ambientLight intensity={2} />
-        <directionalLight castShadow position={[0, 10, 20]} intensity={1.5} />
-        <directionalLight position={[0, 10, 100]} intensity={3} />
-        <gridHelper args={[300, 100, 0x888888, 0x888888]} position={[0, -0.65, 0]}/>
-        <mesh receiveShadow position={[0, -0.7, 0]}>
-          <boxGeometry args={[200, 0.1, 200]} />
-          <meshStandardMaterial color={'#d5d5d5'} roughness={0.0} />
-        </mesh>
-        <Sushi setRotation={setRotation} mode={mode} position={[0, 0, 0]} speed={0.03 * count} scale={[1 + 0.18 * count,1,1]} color={color} />
-        <SetCameraLookAt />
-      </Canvas>
-    </div>
+    <Canvas
+      shadows
+      camera={{ position: [3, 3, 3], fov: 90 }}
+      gl={{
+        toneMapping: THREE.ACESFilmicToneMapping,
+        toneMappingExposure: 1.5,
+      }}
+    >
+      <ambientLight intensity={2} />
+      <directionalLight castShadow position={[0, 10, 20]} intensity={1.5} />
+      <directionalLight position={[0, 10, 100]} intensity={3} />
+      <gridHelper args={[300, 100, 0x888888, 0x888888]} position={[0, -0.65, 0]}/>
+      <mesh receiveShadow position={[0, -0.7, 0]}>
+        <boxGeometry args={[200, 0.1, 200]} />
+        <meshStandardMaterial color={'#d5d5d5'} roughness={0.0} />
+      </mesh>
+      <Sushi setRotation={setRotation} mode={mode} position={[0, 0, 0]} speed={0.03 * count} scale={[1 + 0.18 * count,1,1]} color={color} />
+      <SetCameraLookAt />
+    </Canvas>
   );
 }
 
